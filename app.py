@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from flask import Flask, request, jsonify
 import pytesseract
 from PIL import Image
@@ -75,4 +74,4 @@ def ocr_text():
 
 if __name__ == '__main__':
     app.run(debug=True)
->>>>>>> 81a3273 (Initial commit)
+
