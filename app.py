@@ -2,8 +2,10 @@ from flask import Flask, request, jsonify
 import io
 from PIL import Image
 import os
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 # Lazy loading of OCR reader
 reader = None
@@ -14,6 +16,13 @@ def get_reader():
         import easyocr
         reader = easyocr.Reader(['en'])
     return reader
+
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({
+        "status": "online",
+        "message": "OCR API is running. Send POST requests to /ocr endpoint with an image file."
+    })
 
 @app.route('/ocr', methods=['POST'])
 def ocr_text():
@@ -40,5 +49,5 @@ def ocr_text():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', 10000))  # Changed default to 10000 to match what Render seems to be using
     app.run(host='0.0.0.0', port=port)
