@@ -33,5 +33,5 @@ def ocr_text():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))  # Render provides a PORT env variable
-    app.run(host='0.0.0.0', port=port, debug=True)
+    port = int(os.environ.get("PORT", 10000))  # Render uses dynamic ports
+    app.run(host='0.0.0.0', port=port)
